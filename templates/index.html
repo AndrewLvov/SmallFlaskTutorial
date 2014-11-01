@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Flask tutorial</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet"/>
+</head>
+<body>
+{% if session['logged_user'] %}
+    <a href="/logout/">Get me outta here!</a>
+{% else %}
+    <a href="/register/">Register me now</a> or
+    <a href="/login/">Login</a><br/>
+{% endif %}
+<h1>Hello!</h1>
+<!--<form role="form" method="post" action="/process/">-->
+{% if stored_urls %}
+    <h2>Your previous requests:</h2>
+    <ul>
+    {% for u in stored_urls %}
+        <li>{{ u }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+<form role="form" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">Url:</div>
+            <input id="url" name="url" type="text" class="form-control" value="{{ url }}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Click me!!"/>
+    </div>
+</form>
+{% if url %}
+    <h1>Money extracted for {{ url }}:</h1>
+    <ul>
+    {% for s in money_sums %}
+        <li>{{ s }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+</body>
+</html>
